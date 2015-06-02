@@ -1,0 +1,38 @@
+<h1>Editing List</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @list, class: "btn btn-default" %>
+<%= link_to 'Back', lists_path, class: "btn btn-default" %>
+
+<hr/>
+
+<h3>Add a new List Item</h3>
+<%= form_for @list, url: {action: "add_item"}, method: "post" do |f| %>
+	<div class="input-group">
+	  <input type="text" id="new-item" name="item" class="form-control"/>
+	<span class="input-group-btn">
+		<button type="submit" class="btn btn-success">Add!</button>
+	</span>
+	</div>
+<% end %>
+
+<hr/>
+
+<% if @list.list_items? %>
+	<h3>Remove Items from this list</h3>
+	<div class="list-group display-list">
+	  <% @list.list_items.each do |item| %>
+		  <div class="list-group-item">
+			<div class="lead">
+			  <%= item %>
+			  <div class="pull-right">
+				<%= link_to 'Remove', item, method: :delete, class: "btn btn-default text-danger" %>
+			  </div>
+			</div>
+		  </div>
+	  <% end %>
+	</div>
+\<% end %>
+
+
